@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   List<Student> students = [
     Student.withId(1, "student1", "lastname1", 2, 3),
     Student.withId(2, "student2", "lastname2", 3, 6),
@@ -32,7 +37,7 @@ class HomeScreen extends StatelessWidget {
     throw UnimplementedError();
   }
 
-  Widget buildBody() {
+  buildBody() {
     return Column(
       children: <Widget>[
         Expanded(
@@ -51,7 +56,9 @@ class HomeScreen extends StatelessWidget {
                   leading: Icon(Icons.person_outline),
                   trailing: buildStatusIcon(students[index].status),
                   onTap: () {
-                    this.selectedStudent = students[index];
+                    setState(() {
+                      this.selectedStudent = students[index];
+                    });
                   },
                   onLongPress: () {
                     print("uzun basıldı");
@@ -59,7 +66,53 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
         ),
-        Text("Seçili öğrenci " + this.selectedStudent.firstName)
+        Text("Seçili öğrenci " + this.selectedStudent.firstName),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(primary: Colors.purple),
+                child: Row(
+                  children: [
+                    Icon(Icons.add),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    Text("Öğrenci ekle")
+                  ],
+                  // SizedBox(width: 5.0,),
+                ),
+              ),
+            ),
+            Expanded(
+              child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  child: Row(
+                    children: [
+                      Icon(Icons.upload),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text("Güncelle")
+                    ],
+                  )),
+            ),
+            ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+                child: Row(
+                  children: [
+                    Icon(Icons.delete),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text("Sil")
+                  ],
+                )),
+          ],
+        )
       ],
     );
   }
