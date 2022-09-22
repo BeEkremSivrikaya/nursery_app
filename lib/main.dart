@@ -19,8 +19,9 @@ class HomeScreen extends StatelessWidget {
   List<Student> students = [
     Student.withId(1, "student1", "lastname1", 2, 3),
     Student.withId(2, "student2", "lastname2", 3, 6),
-    Student.withId(3, "student3", "lastName3", 0, 0)
+    Student.withId(3, "student3", "lastName3", 0, 0),
   ];
+  Student selectedStudent = Student.withId(0, "hiç kimse", "", 0, 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,11 +49,26 @@ class HomeScreen extends StatelessWidget {
                       students[index].outputs.toString() +
                       " [${students[index].getStatus}]"),
                   leading: Icon(Icons.person_outline),
-                  trailing: Icon(Icons.done),
+                  trailing: buildStatusIcon(students[index].status),
+                  onTap: () {
+                    this.selectedStudent = students[index];
+                  },
+                  onLongPress: () {
+                    print("uzun basıldı");
+                  },
                 );
               }),
-        )
+        ),
+        Text("Seçili öğrenci " + this.selectedStudent.firstName)
       ],
     );
+  }
+
+  buildStatusIcon(String status) {
+    if (status == "okulda") {
+      return Icon(Icons.done);
+    } else if (status == "okulda değil") {
+      return Icon(Icons.clear);
+    }
   }
 }
