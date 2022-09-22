@@ -11,15 +11,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(home: HomeScreen());
 
-    // throw UnimplementedError();
+    throw UnimplementedError();
   }
 }
 
 class HomeScreen extends StatelessWidget {
   List<Student> students = [
-    Student.withId(1, "ekrem", "sivrikaya", 4, 7),
-    Student.withId(2, "bahar", "sivrikaya", 3, 6),
-    Student.withId(3, "firstName", "lastName", 5, 8)
+    Student.withId(1, "student1", "lastname1", 2, 3),
+    Student.withId(2, "student2", "lastname2", 3, 6),
+    Student.withId(3, "student3", "lastName3", 0, 0)
   ];
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
           title: Center(child: Text("Kreş Uygulaması")),
         ),
         body: buildBody());
-    // throw UnimplementedError();
+    throw UnimplementedError();
   }
 
   Widget buildBody() {
@@ -45,7 +45,8 @@ class HomeScreen extends StatelessWidget {
                   subtitle: Text("giriş saati : " +
                       students[index].inputs.toString() +
                       " çıkış saati : " +
-                      students[index].outputs.toString()),
+                      students[index].outputs.toString() +
+                      " [${students[index].getStatus}]"),
                   leading: Icon(Icons.person_outline),
                   trailing: Icon(Icons.done),
                 );
