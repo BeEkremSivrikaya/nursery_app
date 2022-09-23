@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nursery_app/models/student.dart';
+import 'package:nursery_app/screens/student_Add.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -58,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     setState(() {
                       this.selectedStudent = students[index];
+                      print("tıklandı ${this.selectedStudent.firstName}");
                     });
                   },
                   onLongPress: () {
@@ -71,7 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StudentAdd(students)));
+                },
                 style: ElevatedButton.styleFrom(primary: Colors.purple),
                 child: Row(
                   children: [
@@ -87,7 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Expanded(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(
+                        "öğrenci güncelleme butonu çalışıyor ${selectedStudent.firstName}");
+                  },
                   style: ElevatedButton.styleFrom(primary: Colors.green),
                   child: Row(
                     children: [
@@ -100,7 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
             ),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  print("silme butonu çalışıyor ${selectedStudent.firstName}");
+                },
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 child: Row(
                   children: [
