@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:nursery_app/models/student.dart';
 import 'package:nursery_app/screens/student_Add.dart';
 
+//validation güncelleme silme
 // void main() {
 //   runApp(MyApp());
 // }
@@ -22,9 +25,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
+
+//go on back navigator
   List<Student> students = [
     Student.withId(1, "student1", "lastname1", 2, 3),
-    Student.withId(2, "student2", "lastname2", 2, 6),
+    Student.withId(2, "student2", "lastname2", 3, 6),
     Student.withId(3, "student3", "lastName3", 0, 0),
   ];
   Student selectedStudent = Student.withId(0, "hiç kimse", "", 0, 0);
@@ -68,16 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }),
         ),
-        Text("Seçili öğrenci " + this.selectedStudent.firstName),
+        Text("Seçili öğrenci " + selectedStudent.firstName),
         Row(
           children: [
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StudentAdd(students)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StudentAdd(students)))
+                      .then(GoBackFuntion);
                 },
                 style: ElevatedButton.styleFrom(primary: Colors.purple),
                 child: Row(
@@ -112,6 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
                 onPressed: () {
                   print("silme butonu çalışıyor ${selectedStudent.firstName}");
+                  setState(() {
+                    students.remove(this.selectedStudent);
+                  });
                 },
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 child: Row(
@@ -135,5 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (status == "okulda değil") {
       return Icon(Icons.clear);
     }
+  }
+
+  FutureOr GoBackFuntion(value) {
+    setState(() {});
   }
 }
