@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../models/student.dart';
@@ -77,10 +78,20 @@ class _StudentAddState extends State<StudentAdd> {
   }
 
   buildSubmitButton() {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference testCollectionRef =
+        FirebaseFirestore.instance.collection('testListUser');
+
     return ElevatedButton(
         onPressed: () {
           formKey.currentState!.save();
           widget.students?.add(student);
+          testCollectionRef.add({
+            'firsName': student.firstName,
+            'lastName': student.lastName,
+            'inPut': student.inputs,
+            'outPut': student.outputs
+          });
           Navigator.pop(context);
         },
         child: Text("Kaydet"));

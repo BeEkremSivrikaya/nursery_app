@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     setState(() {
                       this.selectedStudent = students[index];
-                      print("tıklandı ${this.selectedStudent.firstName}");
+                      print("tıklandı ${this.selectedStudent.id}");
                     });
                   },
                   onLongPress: () {

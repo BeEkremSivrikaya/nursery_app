@@ -17,10 +17,19 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Future<FirebaseApp> initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeScreen());
+    return MaterialApp(
+        home: FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        return HomeScreen();
+        // if (snapshot.connectionState == ConnectionState.done) {
+        //   return HomeScreen();
+        // }
+      },
+    ));
 
     throw UnimplementedError();
   }
