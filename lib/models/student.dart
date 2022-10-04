@@ -1,6 +1,8 @@
 class Student {
   int id = 0, inputs = 0, outputs = 0;
-  String firstName = "name", lastName = "surname", status = "statu";
+  String firstName = "name", lastName = "surname", status = "statu"
+      // ,      selectedStudent = ""
+      ;
   bool statu = false;
 
   Student(String firstName, String lastName, int inputs, int outputs) {
